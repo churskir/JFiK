@@ -1,0 +1,3 @@
+SubClassOf ( :apple :fruits )
+EquivalentClasses ( :apple :jablko )
+SubClassOf ( :apple ObjectOneOf ( :jablko ) )
