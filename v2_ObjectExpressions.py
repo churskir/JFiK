@@ -1,5 +1,5 @@
 from utilities import *
-from v2_ClassesExpressions import many_classes_productions
+from v2_ClassProductions import many_classes_productions
 
 # ObjectIntersectionOf ::= 'ObjectIntersectionOf(' ManyClassExpressions ')'
 # ObjectUnionOf ::= 'ObjectUnionOf(' ManyClassExpressions ')'
@@ -21,10 +21,12 @@ class_expr_for_object_expr = {
 }
 
 
-def detect_object_expression(file_reader):
+def detect_and_validate_object_expression(file_reader):
+    if DEBUG:
+        print("detect_and_validate_object_expression")
     word = file_reader.pop_first()
     try:
-        validate_object_expression(
+        return validate_object_expression(
             file_reader,
             class_expr_for_object_expr[word]
         )
@@ -32,10 +34,13 @@ def detect_object_expression(file_reader):
         keys = []
         for key in class_expr_for_object_expr:
             keys.append(key)
-        report_error(file_reader.get_line_index(), keys, word)
+        return report_error(file_reader.get_line_index(), keys, word)
 
 
 def validate_object_expression(file_reader, parameters_validator):
-    check_opening_colon(file_reader)
-    parameters_validator(file_reader)
-    check_closing_colon(file_reader)
+    if DEBUG:
+        print("validate_object_expression")
+    return \
+        check_opening_colon(file_reader) and \
+        parameters_validator(file_reader) and \
+        check_closing_colon(file_reader)

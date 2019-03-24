@@ -1,13 +1,13 @@
 from fileReader import *
-from v2_ClassesExpressions import *
-from v2_ObjectExpressions import *
+from v2_Axioms import detect_and_validate_axiom
 
 
-file_reader = FileReader("test2.txt")
+file_reader = FileReader(file_path="test2.txt")
 
-detect_object_expression(file_reader)
+if not detect_and_validate_axiom(file_reader): exit(1)
 while not file_reader.no_more_words():
-    detect_object_expression(file_reader)
+    if not detect_and_validate_axiom(file_reader):
+        exit(1)
 
 print("Validation succeeded")
 
