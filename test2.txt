@@ -1,4 +1,7 @@
-ObjectIntersectionOf(:apple :apple)
-ObjectUnionOf(:apple :apple)
-ObjectComplementOf(:apple :apple)
-ObjectOneOf()
+EquivalentClasses(
+   :ChildlessPerson
+   ObjectIntersectionOf(
+     :Person
+     ObjectComplementOf( :Parent
+   )
+)

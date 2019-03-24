@@ -1,12 +1,12 @@
-from fileReader import *
-from v2_Axioms import detect_and_validate_axiom
+import fileReader
+import v2_Axioms
 
 
-file_reader = FileReader(file_path="test2.txt")
+file_reader = fileReader.FileReader(file_path="test2.txt")
 
-if not detect_and_validate_axiom(file_reader): exit(1)
+if not v2_Axioms.detect_and_validate_axiom(file_reader): exit(1)
 while not file_reader.no_more_words():
-    if not detect_and_validate_axiom(file_reader):
+    if not v2_Axioms.detect_and_validate_axiom(file_reader):
         exit(1)
 
 print("Validation succeeded")

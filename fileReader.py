@@ -1,8 +1,12 @@
+import utilities
+
+
 class FileReader:
 
     line_index = 0
+    local_debug = False
 
-    def __init__(self, file_path = None, lines = None, line_index = None):
+    def __init__(self, file_path=None, lines=None, line_index=None):
         assert file_path is not None or (lines is not None and line_index is not None)
         if file_path is None:
             self.line_index = line_index
@@ -30,7 +34,9 @@ class FileReader:
             exit(0)
 
     def copy(self):
-        return FileReader(lines=self.lines, line_index=self.line_index)
+        if utilities.DEBUG:
+            print("Making copy of a file reader")
+        return FileReader(lines=self.lines.copy(), line_index=self.line_index)
 
     def pop_first(self):
         if self.no_more_words():
@@ -67,7 +73,10 @@ class FileReader:
         if self.no_more_words():
             return None
         if self.__no_more_words_in_line():
+            if self.local_debug:
+                print("Increasing line_index, line_index=%s, lines=%s" % (self.line_index, self.lines))
             self.line_index += 1
         assert self.line_index < len(self.lines)
+        assert len(self.lines[self.line_index]) > 0
         return self.lines[self.line_index].pop(0)
 
