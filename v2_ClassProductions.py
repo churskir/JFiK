@@ -12,7 +12,7 @@ def class_production(file_reader):
     if utilities.DEBUG:
         print("Expecting '%s' to be a alphanumerical phrase" % word)
     if not word[0].isalnum():
-        return utilities.report_error(file_reader.get_line_index(), "word", word)
+        return utilities.report_error(file_reader.get_line_index(), "phrase", word)
     return True
 
 

@@ -4,7 +4,7 @@ import utilities
 class FileReader:
 
     line_index = 0
-    local_debug = False
+    local_debug = True
 
     def __init__(self, file_path=None, lines=None, line_index=None):
         assert file_path is not None or (lines is not None and line_index is not None)
@@ -40,8 +40,7 @@ class FileReader:
 
     def pop_first(self):
         if self.no_more_words():
-            print("Unexpected EOF")
-            exit(1)
+            return None
         return self.__next()
 
     def get_line_index(self):

@@ -4,9 +4,9 @@ DEBUG = True
 def report_error(line, expected, found):
     line += 1
     if found is None:
-        print("Error in line %d: Expected '%s', found nothing" % (line, expected))
+        print("Error in line %d: Expected %s, found nothing" % (line, expected))
     else:
-        print("Error in line %d: Expected '%s', found '%s'" % (line, expected, found))
+        print("Error in line %d: Expected %s, found '%s'" % (line, expected, found))
     exit(1)
 
 

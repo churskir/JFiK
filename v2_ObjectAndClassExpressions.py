@@ -1,16 +1,45 @@
 import utilities
 import v2_ClassProductions
-import v2_ClassExpressions
 
 # ObjectIntersectionOf ::= 'ObjectIntersectionOf(' ManyClassExpressions ')'
 # ObjectUnionOf ::= 'ObjectUnionOf(' ManyClassExpressions ')'
 # ObjectComplementOf ::= 'ObjectComplementOf(' ClassExpression ')'
 # ObjectOneOf ::= 'ObjectOneOf(' ManyClasses ')'
 
+
+# Returns False if failed
+def class_expression(file_reader):
+    word = file_reader.get(0)
+    if utilities.DEBUG:
+        print("class_expression")
+        print("Interpreting '%s'" % word)
+    if word == ':':
+        return v2_ClassProductions.class_production(file_reader)
+    return detect_and_validate_object_expression(file_reader)
+
+
+# Returns False if failed
+def two_class_expressions(file_reader):
+    if utilities.DEBUG:
+        print("two_class_expressions")
+    return class_expression(file_reader) and class_expression(file_reader)
+
+
+# Returns False if failed
+def many_class_expressions(file_reader):
+    if utilities.DEBUG:
+        print("many_class_expressions")
+    file_reader_copy = file_reader.copy()
+    if two_class_expressions(file_reader):
+        return True
+    file_reader = file_reader_copy
+    return class_expression(file_reader) and many_class_expressions(file_reader)
+
+
 class_expr_for_object_expr = {
-    "ObjectIntersectionOf": v2_ClassExpressions.many_class_expressions,
-    "ObjectUnionOf": v2_ClassExpressions.many_class_expressions,
-    "ObjectComplementOf": v2_ClassExpressions.class_expression,
+    "ObjectIntersectionOf": many_class_expressions,
+    "ObjectUnionOf": many_class_expressions,
+    "ObjectComplementOf": class_expression,
     "ObjectOneOf": v2_ClassProductions.many_classes_productions
 }
 

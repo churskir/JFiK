@@ -1,11 +1,11 @@
 import utilities
-import v2_ClassExpressions
+import v2_ObjectAndClassExpressions
 import v2_ClassProductions
 
 word_to_axiom_validator = {
-    "SubClassOf": v2_ClassExpressions.two_class_expressions,
-    "EquivalentClasses": v2_ClassExpressions.many_class_expressions,
-    "DisjointClasses": v2_ClassExpressions.many_class_expressions,
+    "SubClassOf": v2_ObjectAndClassExpressions.two_class_expressions,
+    "EquivalentClasses": v2_ObjectAndClassExpressions.many_class_expressions,
+    "DisjointClasses": v2_ObjectAndClassExpressions.many_class_expressions,
     "SameIndividual": v2_ClassProductions.many_classes_productions,
     "DifferentIndividuals": v2_ClassProductions.many_classes_productions
 }
